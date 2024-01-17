@@ -1,0 +1,28 @@
+footer {
+	background: #805F49;
+	display: flex;
+	justify-content: center;
+	padding: 50px;
+	color: white;
+	line-height: 150%;
+}
+footer a {
+	color: white;
+	text-decoration: none;
+}
+footer a:hover {
+		text-decoration: underline;
+	}
+footer .container {
+	display: flex;
+	justify-content: space-around;
+}
+footer h3 {
+	font-size: 1.5em;
+	margin: 0.75em 0;
+}
+footer .otevreno th {
+	text-align: right;
+	font-weight: bold;
+	padding-right: 1.5em;
+}

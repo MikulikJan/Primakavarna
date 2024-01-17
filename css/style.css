@@ -1,0 +1,23 @@
+/* kaushan-script-regular - latin */
+@font-face {
+	font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+	font-family: 'Kaushan Script';
+	font-style: normal;
+	font-weight: 400;
+	src: url('../fonts/kaushan-script-v16-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+html {
+	font-family: Arial;
+	font-size: 16px;
+}
+.container {
+	width: 1000px;
+}
+@media (max-width:1000px) {
+	.container {
+		padding: 0 5%;
+	}
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: Kaushan Script;
+}
