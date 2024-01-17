@@ -19,7 +19,7 @@ else
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrimaKavárna</title>
+    <title><?php echo $seznamStranek[$stranka]->titulek; ?></title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
@@ -44,11 +44,12 @@ else
 
                 <nav>
                     <ul>
-                        <li><a href="?stranka=uvod">Domů</a></li>
-                        <li><a href="?stranka=nabidka">Nabídka</a></li>
-                        <li><a href="?stranka=galerie">Galerie</a></li>
-                        <li><a href="?stranka=rezervace">Rezervace</a></li>
-                        <li><a href="?stranka=kontakt">Kontakt</a></li>
+                        <?php
+                        foreach ($seznamStranek as $idStranky => $instanceStranky)
+                        {
+                            echo "<li><a href='?stranka=$instanceStranky->id'>$instanceStranky->menu</a></li>";
+                        }
+                        ?>
                     </ul>
                 </nav>
             </div>
@@ -76,11 +77,12 @@ else
             <nav>
                 <h3>Menu</h3>
                 <ul>
-                    <li><a href="?stranka=uvod">Domů</a></li>
-                    <li><a href="?stranka=nabidka">Nabídka</a></li>
-                    <li><a href="?stranka=galerie">Galerie</a></li>
-                    <li><a href="?stranka=rezervace">Rezervace</a></li>
-                    <li><a href="?stranka=kontakt">Kontakt</a></li>
+                    <?php
+                    foreach ($seznamStranek as $idStranky => $instanceStranky)
+                    {
+                        echo "<li><a href='?stranka=$instanceStranky->id'>$instanceStranky->menu</a></li>";
+                    }
+                     ?>
                 </ul>
             </nav>
 
