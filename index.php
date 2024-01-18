@@ -57,7 +57,7 @@ else
                         foreach ($seznamStranek as $idStranky => $instanceStranky)
                         {
                             if ($instanceStranky->menu != "")
-                            echo "<li><a href='?stranka=$instanceStranky->id'>$instanceStranky->menu</a></li>";
+                            echo "<li><a href='$instanceStranky->id'>$instanceStranky->menu</a></li>";
                         }
                         ?>
                     </ul>
@@ -91,7 +91,7 @@ else
                      foreach ($seznamStranek as $idStranky => $instanceStranky)
                      {
                          if ($instanceStranky->menu != "")
-                         echo "<li><a href='?stranka=$instanceStranky->id'>$instanceStranky->menu</a></li>";
+                         echo "<li><a href='$instanceStranky->id'>$instanceStranky->menu</a></li>";
                      }
                     ?>
                 </ul>
