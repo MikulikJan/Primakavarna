@@ -29,6 +29,27 @@ if (array_key_exists("odhlasit", $_POST))
     unset($_SESSION["prihlasenyUzivatel"]);
     header("Location: ?");
 }
+
+// zpracovani akci v administraci je pouze pro prihlasene uzivatele
+if (array_key_exists("prihlasenyUzivatel", $_SESSION))
+{
+    // promenna predstavujici stranku s kterou zrovna editujeme
+    $instanceAktualniStranky = null;
+
+    // zpracovani vyberu aktualni stranky
+    if (array_key_exists("stranka", $_GET))
+    {
+        $idStranky = $_GET["stranka"];
+        $instanceAktualniStranky = $seznamStranek[$idStranky];
+    }
+
+    // zpracovani formulare pro ulozeni
+    if (array_key_exists("ulozit", $_POST))
+    {
+        $obsah = $_POST["obsah"];
+        $instanceAktualniStranky->setObsah($obsah);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,6 +87,35 @@ if (array_key_exists("odhlasit", $_POST))
         echo "<form method='post'>
             <button name='odhlasit'>Odhlásit</button>
             </form>";
+
+        // vypiseme seznam stranek, ktere lze editovat
+        echo "<ul>";
+        foreach ($seznamStranek as $idStranky => $instanceStranky)
+        {
+            echo "<li>
+                <a href='?stranka=$instanceStranky->id'>$instanceStranky->id</a>
+
+                / <a href='$instanceStranky->id' target='_blank'>zobrazit</a>
+                </li>";
+        }
+        echo "</ul>";
+
+        // editacni formular
+        // zobbrazit pokud je nejaka stranka vybrana k editaci
+        if ($instanceAktualniStranky != null)
+        {
+            echo "<h1>Editace stránky: $instanceAktualniStranky->id</h1>";
+
+            ?>
+            <form method="post">
+                <textarea name="obsah" cols="80" rows="15"><?php
+                echo htmlspecialchars($instanceAktualniStranky->getObsah());
+                ?></textarea>
+                <br>
+                <button name="ulozit">Uložit</button>
+            </form>
+            <?php
+        }
     }
     ?>
 </body>

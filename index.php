@@ -6,12 +6,13 @@ if (array_key_exists("stranka", $_GET))
 {
     $stranka = $_GET["stranka"];
 
-    // kontrola, zdali zadana stranka existuje
+    // kontrola zdali zadana stranka existuje
     if (array_key_exists($stranka, $seznamStranek) == false)
     {
+        // stranka neexistuje
         $stranka = "404";
 
-        // info pro vyhledavac
+        // odeslat informaci i vyhledavaci ze url neexistuje
         http_response_code(404);
     }
 }
@@ -57,7 +58,9 @@ else
                         foreach ($seznamStranek as $idStranky => $instanceStranky)
                         {
                             if ($instanceStranky->menu != "")
-                            echo "<li><a href='$instanceStranky->id'>$instanceStranky->menu</a></li>";
+                            {
+                                echo "<li><a href='$instanceStranky->id'>$instanceStranky->menu</a></li>";
+                            }
                         }
                         ?>
                     </ul>
@@ -78,7 +81,7 @@ else
 
     <section>
         <?php
-        echo file_get_contents("$stranka.html");
+        echo $seznamStranek[$stranka]->getObsah();
         ?>
     </section>
 
@@ -88,11 +91,13 @@ else
                 <h3>Menu</h3>
                 <ul>
                     <?php
-                     foreach ($seznamStranek as $idStranky => $instanceStranky)
-                     {
-                         if ($instanceStranky->menu != "")
-                         echo "<li><a href='$instanceStranky->id'>$instanceStranky->menu</a></li>";
-                     }
+                    foreach ($seznamStranek as $idStranky => $instanceStranky)
+                    {
+                        if ($instanceStranky->menu != "")
+                        {
+                            echo "<li><a href='$instanceStranky->id'>$instanceStranky->menu</a></li>";
+                        }
+                    }
                     ?>
                 </ul>
             </nav>
