@@ -5,6 +5,15 @@ require "stranky.php";
 if (array_key_exists("stranka", $_GET))
 {
     $stranka = $_GET["stranka"];
+
+    // kontrola, zdali zadana stranka existuje
+    if (array_key_exists($stranka, $seznamStranek) == false)
+    {
+        $stranka = "404";
+
+        // info pro vyhledavac
+        http_response_code(404);
+    }
 }
 else
 {
@@ -19,7 +28,7 @@ else
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $seznamStranek[$stranka]->titulek; ?></title>
+    <title><?php echo $seznamStranek[$stranka]->titulek ?></title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
@@ -47,6 +56,7 @@ else
                         <?php
                         foreach ($seznamStranek as $idStranky => $instanceStranky)
                         {
+                            if ($instanceStranky->menu != "")
                             echo "<li><a href='?stranka=$instanceStranky->id'>$instanceStranky->menu</a></li>";
                         }
                         ?>
@@ -78,11 +88,12 @@ else
                 <h3>Menu</h3>
                 <ul>
                     <?php
-                    foreach ($seznamStranek as $idStranky => $instanceStranky)
-                    {
-                        echo "<li><a href='?stranka=$instanceStranky->id'>$instanceStranky->menu</a></li>";
-                    }
-                     ?>
+                     foreach ($seznamStranek as $idStranky => $instanceStranky)
+                     {
+                         if ($instanceStranky->menu != "")
+                         echo "<li><a href='?stranka=$instanceStranky->id'>$instanceStranky->menu</a></li>";
+                     }
+                    ?>
                 </ul>
             </nav>
 
